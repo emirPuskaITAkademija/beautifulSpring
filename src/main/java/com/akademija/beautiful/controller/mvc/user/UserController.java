@@ -1,5 +1,6 @@
 package com.akademija.beautiful.controller.mvc.user;
 
+import com.akademija.beautiful.bean.HelloWorldBean;
 import com.akademija.beautiful.entity.user.User;
 import com.akademija.beautiful.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.lang.annotation.Annotation;
 import java.util.List;
 
 /**
@@ -27,6 +29,9 @@ public class UserController {
     private UserService userService;
 
     @Autowired
+    private HelloWorldBean helloWorldBean;
+
+    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     @GetMapping("/")
@@ -38,6 +43,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String login(){
+        System.out.println("HelloWorldBean-UserController: " + helloWorldBean.hashCode());
         return "login";
     }
 

@@ -1,5 +1,6 @@
 package com.akademija.beautiful.controller.mvc.product;
 
+import com.akademija.beautiful.bean.HelloWorldBean;
 import com.akademija.beautiful.entity.product.Product;
 import com.akademija.beautiful.entity.user.User;
 import com.akademija.beautiful.service.product.ProductService;
@@ -18,9 +19,13 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private HelloWorldBean helloWorldBean;
+
 
     @GetMapping("/products")
     public String getAllProducts(Model model){
+        System.out.println("HelloWorldBean-ProductController: " + helloWorldBean.hashCode());
         List<Product> products = productService.getAllProducts();
         model.addAttribute("proizvodi", products);
         return "product";
