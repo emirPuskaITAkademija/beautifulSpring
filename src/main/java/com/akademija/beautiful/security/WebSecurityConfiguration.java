@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -40,8 +41,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 //Svi koji žele da se registruju mogu to učiniti kroz /register /saveUser
                 .authorizeRequests()
-                .antMatchers("/register", "/saveUser")
+                .antMatchers("/register", "/saveUser", "/api/notes/*")
                 .permitAll()
+
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -55,7 +57,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 //basic authentication -> username, password
-                .httpBasic();
+                .httpBasic()
+                .and()
+                .csrf().disable();
     }
 
     @Bean

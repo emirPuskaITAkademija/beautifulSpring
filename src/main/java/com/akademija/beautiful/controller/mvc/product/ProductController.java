@@ -48,4 +48,9 @@ public class ProductController {
             return "redirect:/addProduct?error";
         }
     }
+
+    @GetMapping("/note")
+    public String showNote(){
+        return "note";
+    }
 }
